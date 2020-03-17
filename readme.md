@@ -52,19 +52,19 @@ const greece = db.countries.findOne({ name: "Greece" });
 
 ### update
 
-replacing an entry:
-
-```js
-db.countries.updateOne(
-  { name: "Argentina" },
-  { name: "Argentina", population: 44 }
-);
-```
-
 changing an entry:
 
 ```js
-db.countries.updateOne({ name: "Brazil" }, { $set: { capital: "Brasilia" } });
+db.countries.updateOne({ name: "Argentina" }, { $set: { population: 44 } });
+```
+
+replacing an entry:
+
+```js
+db.countries.replaceOne(
+  { name: "Brazil" },
+  { name: "Brazil", population: 210 }
+);
 ```
 
 ### delete

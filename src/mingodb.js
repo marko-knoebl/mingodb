@@ -40,6 +40,10 @@ class Collection {
     this._db.updateOne(this._name, query, update);
   }
 
+  replaceOne(query, replacement) {
+    this._db.replaceOne(this._name, query, replacement);
+  }
+
   deleteOne(query) {
     this._db.deleteOne(this._name, query);
   }

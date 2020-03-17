@@ -59,19 +59,19 @@ class FileDB {
 
   updateOne(collectionName, query, update) {
     const collection = this._collectionData(collectionName);
-    if (update.$set === undefined) {
-      // replace document
-      const entryIndex = collection.findIndex(doc => match(doc, query));
-      const entryId = collection[entryIndex]._id;
-      collection[entryIndex] = { ...update, _id: entryId };
-    } else {
-      // update document
-      const entry = collection.find(doc => match(doc, query));
-      for (let key in update.$set) {
-        entry[key] = update.$set[key];
-      }
+    // update document
+    const entry = collection.find(doc => match(doc, query));
+    for (let key in update.$set) {
+      entry[key] = update.$set[key];
     }
     this.save();
+  }
+
+  replaceOne(collectionName, query, replacement) {
+    const collection = this._collectionData(collectionName);
+    const entryIndex = collection.findIndex(doc => match(doc, query));
+    const entryId = collection[entryIndex]._id;
+    collection[entryIndex] = { ...replacement, _id: entryId };
   }
 
   deleteOne(collectionName, query = {}) {

@@ -25,15 +25,16 @@ console.log(greece);
 
 console.log("\nupdating countries");
 
-console.log("\nreplacing an entry");
-db.countries.updateOne(
-  { name: "Argentina" },
-  { name: "Argentina", population: 44 }
-);
+console.log("\nchanging an entry");
+db.countries.updateOne({ name: "Argentina" }, { $set: { population: 44 } });
 console.log(db.countries.findOne({ name: "Argentina" }));
 
-console.log("\nchanging an entry");
-db.countries.updateOne({ name: "Brazil" }, { $set: { capital: "Brasilia" } });
+console.log("\nreplacing an entry");
+db.countries.replaceOne(
+  { name: "Brazil" },
+  { name: "Brazil", population: 210 }
+);
+console.log(db.countries.findOne({ name: "Brazil" }));
 
 console.log("\ndeleting an entry");
 db.countries.deleteOne({ name: "Finland" });

@@ -101,18 +101,6 @@ describe("update", () => {
     });
   });
 
-  it("replaces a single entry", () => {
-    db.updateOne(
-      "countries",
-      { name: "Argentina" },
-      { name: "Argentina", population: 44 }
-    );
-    const argentina = db.findOne("countries", { name: "Argentina" });
-    expect(argentina.name).toEqual("Argentina");
-    expect(argentina.population).toEqual(44);
-    expect(argentina.continent).toEqual(undefined);
-  });
-
   it("updates a single entry", () => {
     db.updateOne(
       "countries",
@@ -122,6 +110,18 @@ describe("update", () => {
     const argentina = db.findOne("countries", { name: "Argentina" });
     expect(argentina.name).toEqual("Argentina");
     expect(argentina.population).toEqual(44);
+  });
+
+  it("replaces a single entry", () => {
+    db.replaceOne(
+      "countries",
+      { name: "Argentina" },
+      { name: "Argentina", population: 44 }
+    );
+    const argentina = db.findOne("countries", { name: "Argentina" });
+    expect(argentina.name).toEqual("Argentina");
+    expect(argentina.population).toEqual(44);
+    expect(argentina.continent).toEqual(undefined);
   });
 });
 

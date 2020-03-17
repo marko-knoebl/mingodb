@@ -109,8 +109,15 @@ describe("update", () => {
     });
   });
 
+  it("updates a single entry", () => {
+    db.countries.updateOne({ name: "Argentina" }, { $set: { population: 44 } });
+    const argentina = db.countries.findOne({ name: "Argentina" });
+    expect(argentina.name).toEqual("Argentina");
+    expect(argentina.population).toEqual(44);
+  });
+
   it("replaces a single entry", () => {
-    db.countries.updateOne(
+    db.countries.replaceOne(
       { name: "Argentina" },
       { name: "Argentina", population: 44 }
     );
@@ -118,12 +125,5 @@ describe("update", () => {
     expect(argentina.name).toEqual("Argentina");
     expect(argentina.population).toEqual(44);
     expect(argentina.continent).toEqual(undefined);
-  });
-
-  it("updates a single entry", () => {
-    db.countries.updateOne({ name: "Argentina" }, { $set: { population: 44 } });
-    const argentina = db.countries.findOne({ name: "Argentina" });
-    expect(argentina.name).toEqual("Argentina");
-    expect(argentina.population).toEqual(44);
   });
 });
