@@ -67,7 +67,7 @@ changing an entry:
 db.countries.updateOne({ name: "Brazil" }, { $set: { capital: "Brasilia" } });
 ```
 
-## delete
+### delete
 
 deleting an entry:
 
